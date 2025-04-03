@@ -14,9 +14,11 @@ app.use(cors({
 app.get("/take-screenshot", async (req, res) => {
 	try {
 		const browser = await puppeteer.launch({
-			headless: "new",
-			args: ["--no-sandbox", "--disable-setuid-sandbox"],
-		});
+	headless: "new",
+	args: ["--no-sandbox", "--disable-setuid-sandbox"],
+	executablePath: "/opt/render/.cache/puppeteer/chrome/linux-134.0.6998.165/chrome",
+});
+
 		const page = await browser.newPage();
 		await page.goto(`hhttps://captureshot.netlify.app/`, { waitUntil: "networkidle2" });
 		const screenshot = await page.screenshot({ fullPage: true });
